@@ -35,16 +35,16 @@ def permission_check(*permissions):
         @wraps(func)
         def wrapper(*args, **kwargs):
             # 检验用户的登录状态
+            p = ''
             if request.headers.get('token', ''):
                 user = User.verify_auth_token(request.headers.get('token', ''))
                 if user:
-                    # 给flask g 变量赋值
                     g.user = user
                     if permissions:
-                        pers = UserPermissionBind.query.filter(UserPermissionBind.uid == user.id).all()
-                        for per in pers:
-                            if per.permission_id in permissions:
-                                break
+                        per = UserPermissionBind.query.filter(UserPermissionBind.uid == user.id).first()
+
+                        if per.permission_id in permissions:
+                            p = per.permission_id
                         else:
                             return get_response(error_code=ERROR_PERMISSION_DENIED, message='没有权限执行此操作')
                 else:
@@ -52,6 +52,7 @@ def permission_check(*permissions):
 
             else:
                 return get_response(error_code=ERROR_RUNTIME_TOKEN, message='用户未登录,请重新登录')
+            kwargs['permission'] = p
             return func(*args, **kwargs)
 
         return wrapper

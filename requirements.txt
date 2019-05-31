@@ -1,4 +1,8 @@
-
+flask_migrate
+flask_script
+flask
+flask_cache
+flask_cors
 
 
 

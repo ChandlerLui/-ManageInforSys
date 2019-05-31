@@ -36,50 +36,45 @@ class Development(Config):
     """开发环境下的配置"""
 
     ENV = 'dev'
-    LOG_PATH = r'/Users/Joey/Documents/log/price_tag'
-    APP_ROOT = r'/Users/Joey/PycharmProjects/-ManageInforSys'
-    FILE_ROOT = r'/Users/Joey/PycharmProjects/ManageInforSys/'
+    # LOG_PATH = r'/Users/Joey/Documents/log/price_tag'
+    # APP_ROOT = r'/Users/Joey/PycharmProjects/ManageInforSys'
+    # FILE_ROOT = r'/Users/Joey/PycharmProjects/ManageInforSys/'
+    LOG_PATH = r'/home/log/mis'
+    APP_ROOT = r'/home/LeiGG/projects/ManageInforSys'
+    FILE_ROOT = r'/tmp'
     SQLALCHEMY_DATABASE_URI = "mysql+pymysql://root:123456@127.0.0.1:3306/manage_info_sys?charset=utf8"
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     # SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://root:123456@localhost:3306/price_tag_system?charset=utf8'
     CELERY_BROKER_URL = 'redis://127.0.0.1:6379/3'
     result_backend = 'redis://127.0.0.1:6379/3'
     DEBUG = True
-    ALI_OSS_BUCKET = 'mi-bucket-test'
-    ALI_OSS_ENDPOINT = 'oss-cn-shanghai.aliyuncs.com'
-    ACCESS_KEY_ID = 'LTAIMmqyJfA4MF5k'
-    ACCESS_KEY_SECRET = 'FWx1QJKGqeNf7hARcSsneDFwNHmi1b'
-    CDN_SERVER = 'https://mi-bucket-test.oss-cn-shanghai.aliyuncs.com/'
+    ALI_OSS_BUCKET = 'hangzhouminzhu'
+    ALI_OSS_ENDPOINT = 'oss-cn-hangzhou.aliyuncs.com'
+    ACCESS_KEY_ID = 'LTAIkQcP5dkTTSlV'
+    ACCESS_KEY_SECRET = 'LmTyKK39g0HnrprUWOKeLHZucWP2zG'
+    CDN_SERVER = 'https://hangzhouminzhu.oss-cn-hangzhou.aliyuncs.com/'
+# hangzhouminzhu.oss-cn-hangzhou.aliyuncs.com
 
 
 class Test(Config):
     """测试环境下的配置"""
     ENV = 'test'
-    LOG_PATH = r'/home/log/price_tag'
-    APP_ROOT = r'/home/www/Management Information System'
+    LOG_PATH = r'/home/log/mis'
+    APP_ROOT = r'/home/LeiGG/projects/ManageInforSys'
     FILE_ROOT = r'/tmp'
-    SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://tissue:6ff3520683ba81d44ea9f4a81349ea80@' \
-                              '127.0.0.1:3306/file_manager?charset=utf8'
+    SQLALCHEMY_DATABASE_URI = "mysql+pymysql://root:123456@127.0.0.1:3306/manage_info_sys?charset=utf8"
     SQLALCHEMY_TRACK_MODIFICATIONS = False
-    # SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://root:123456@localhost:3306/price_tag_system?charset=utf8'
-    CELERY_BROKER_URL = 'redis://:ed36980df7b4c18c90c606ab776d5661@127.0.0.1:17618/4'
-    CELERY_RESULT_BACKEND = 'redis://:ed36980df7b4c18c90c606ab776d5661@127.0.0.1:17618/4'
-    CACHE_REDIS_HOST = '101.132.137.180'
-    CACHE_REDIS_PORT = 17618
-    CACHE_REDIS_PASSWORD = 'ed36980df7b4c18c90c606ab776d5661'
-    CACHE_REDIS_DB = 4
     DEBUG = False
-    FFMPEG_PATH = '/usr/local/bin/ffmpeg'
-    ALI_OSS_BUCKET = 'mi-bucket'
-    ALI_OSS_ENDPOINT = 'oss-cn-shanghai-internal.aliyuncs.com'
-    ACCESS_KEY_ID = 'LTAIMmqyJfA4MF5k'
-    ACCESS_KEY_SECRET = 'FWx1QJKGqeNf7hARcSsneDFwNHmi1b'
-    CDN_SERVER = 'https://cdn.ibeelink.com/'
+    ALI_OSS_BUCKET = 'hangzhouminzhu'
+    ALI_OSS_ENDPOINT = 'oss-cn-hangzhou.aliyuncs.com'
+    ACCESS_KEY_ID = 'LTAIkQcP5dkTTSlV'
+    ACCESS_KEY_SECRET = 'LmTyKK39g0HnrprUWOKeLHZucWP2zG'
+    CDN_SERVER = 'https://hangzhouminzhu.oss-cn-hangzhou.aliyuncs.com/'
 
 
 def get_config():
-    if env == 'product':
-        return Test
-    elif 'dev' in env:
+    if env == 'dev':
         return Development
+    else:
+        return Test
 

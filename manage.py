@@ -4,7 +4,7 @@ from flask_script import Manager
 from app import create_app
 from db_base import db
 from manage_info_sys import init_app_br
-
+from manage_info_sys.api.models.user import User, UserPermissionBind, Permission
 from manage_info_sys.utils import logger
 # 创建APP
 app = create_app()
